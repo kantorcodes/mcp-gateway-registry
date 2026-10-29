@@ -119,13 +119,15 @@ One of the key features of the access control system is its ability to different
 
 ### MCP Protocol Methods
 
-Methods are standard MCP protocol operations that all servers support:
+MCP defines different operations depending on the negotiated protocol version and the server's capabilities. Not every MCP server supports every method. The examples below include the initialization handshake used by protocol versions through `2025-11-25`. The stateless `2026-07-28` revision no longer uses `initialize` or `notifications/initialized`; a client can instead use `server/discover` to learn about the server. Tool methods are available only when the server supports tools.
 
-- **`initialize`**: Initialize connection with the server
-- **`notifications/initialized`**: Handle initialization notifications
+- **`initialize`**: Establish a connection in handshake-based MCP versions
+- **`notifications/initialized`**: Signal that initialization has completed in handshake-based versions
 - **`ping`**: Health check operation
-- **`tools/list`**: List available tools on the server
-- **`tools/call`**: Call a specific tool (requires additional tool-level validation)
+- **`tools/list`**: List available tools when the server provides tool functionality
+- **`tools/call`**: Call a specific tool when supported (requires additional tool-level validation)
+
+For protocol lifecycle differences, see the [MCP 2026-07-28 specification release](https://blog.modelcontextprotocol.io/posts/2026-07-28/).
 
 ### Tool-Specific Access Control
 
